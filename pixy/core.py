@@ -161,7 +161,8 @@ def read_and_filter_genotypes(args, chromosome, window_pos_1, window_pos_2, site
     window_region = chromosome + ":" + str(window_pos_1) + "-" + str(window_pos_2)
     
     # read in data from the source VCF for the current window
-    callset = allel.read_vcf(args.vcf, region = window_region, fields = ['CHROM', 'POS', 'calldata/GT', 'calldata/DP', 'variants/is_snp', 'variants/numalt'])
+    # for all samples, `args.ploidy` GT slots are reserved (excess filled with NAs)
+    callset = allel.read_vcf(args.vcf, region = window_region, fields = ['CHROM', 'POS', 'calldata/GT', 'calldata/DP', 'variants/is_snp', 'variants/numalt'], numbers={'GT':args.ploidy})
     
     # keep track of whether the callset was empty (no sites for this range in the VCF)
     # used by compute_summary_stats to add info about completely missing sites

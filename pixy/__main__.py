@@ -62,6 +62,7 @@ def main():
     additional.add_argument('--window_size', type=int, nargs='?', help='Window size in base pairs over which to calculate stats.\nAutomatically determines window coordinates/bounds (see additional options below).', required=False)
     additional.add_argument('--bed_file', type=str, nargs='?', help='Path to a headerless .BED file with columns [chrom chromStart chromEnd].\nManually defines window bounds, which can be heterogenous in size.', required=False)
 
+    optional.add_argument('--ploidy', type=int, nargs='?', default=2, help='Maximum number of alleles per site in VCF file (default=2).', required=False)
     optional.add_argument('--n_cores', type=int, nargs='?', default=1, help='Number of CPUs to utilize for parallel processing (default=1).', required=False)
     optional.add_argument('--output_folder', type=str, nargs='?', default='', help='Folder where output will be written, e.g. path/to/output_folder.\nDefaults to current working directory.', required=False)
     optional.add_argument('--output_prefix', type=str, nargs='?', default='pixy', help='Optional prefix for output file(s), with no slashes.\ne.g. \"--output_prefix output\" will result in [output folder]/output_pi.txt. \nDefaults to \'pixy\'.', required=False)
